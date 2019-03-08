@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 70%;
+  height: 70%;
+  border: solid 1px #000;
+}
+
+.content,
+.btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.content {
+  height: 100%;
+}
+
+.btns {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5em;
+  margin: 0.3em;
+  border-radius: 3px;
+}
+
+.c1 {
+  background: #0084ff;
+}
+.c2 {
+  background: #eb4924;
+}
+.c3 {
+  background: #25d366;
+}
