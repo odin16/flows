@@ -7,6 +7,7 @@ const { Provider, Consumer } = createContext<Partial<ConsumerProps>>({});
 
 const FlowProvider: SFC<ProviderProps> = props => {
   const [views, setViews] = useState({});
+  const [titleView, setTitleView] = useState(null);
   const [activeView, setActiveView] = useState(props.activeView || null);
   const [viewsHistory, setViewsHistory] = useState([]);
   const [prevActiveView, setPrevActiveView] = useState(
@@ -19,11 +20,15 @@ const FlowProvider: SFC<ProviderProps> = props => {
         ...views,
         [newView.id]: omit(newView, 'id')
       });
+      if (newView.id === props.activeView) {
+        setTitleView(newView.title);
+      }
     }
   };
 
   const goToView = (id: string) => event => {
     if (id in views) {
+      setTitleView(views[id].title);
       setPrevActiveView(activeView);
       setViewsHistory([...viewsHistory, activeView]);
       setActiveView(id);
@@ -37,20 +42,24 @@ const FlowProvider: SFC<ProviderProps> = props => {
 
   const goToBack = () => {
     const arr = [...viewsHistory];
+    const id = arr.pop();
+
+    setTitleView(views[id].title);
     setPrevActiveView(activeView);
-    setActiveView(arr.pop());
+    setActiveView(id);
     setViewsHistory(arr);
   };
 
   const context: ConsumerProps = {
     flowContext: {
-      existsViewsHistory: !!viewsHistory.length,
+      titleView,
       prevActiveView,
       activeView,
       addView,
       goToView,
       goToBack,
-      closeFlow
+      closeFlow,
+      existsViewsHistory: !!viewsHistory.length
     }
   };
 

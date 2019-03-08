@@ -21,10 +21,9 @@ const ModalItem: SFC<ModalItemProps> = props => {
       }) => {
         return (
           <ViewConsumer>
-            {({ viewContext: { title, actions } }) => {
+            {({ viewContext: { actions } }) => {
               return (
                 <div className={props.className}>
-                  <h2>{title}</h2>
                   <div className="btns">
                     {actions &&
                       Object.keys(actions).map((key, i) => (
