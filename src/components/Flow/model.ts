@@ -1,20 +1,26 @@
-import { FlowConfig } from '../shared/model';
-import Views from '../shared/views';
+export interface ViewConfig {
+  next: string | string[];
+}
+
+export interface ListView {
+  [key: string]: ViewConfig;
+}
+
+export interface FlowConfig {
+  activeView: string;
+  views: ListView;
+}
 
 export interface ConsumerProps {
-  flowContext: {
-    prevActiveView: Views;
-    activeView: Views;
-    addView: () => void;
-    goToView: () => void;
-  };
+  views: ListView;
+  prevActiveView: string;
+  activeView: string;
+  existsViewsHistory: boolean;
+  goToView: (id: string) => void;
+  backInHistory: () => void;
+  goToNextView: (branch?: number) => void;
 }
 
 export interface ProviderProps {
-  prevActiveView: Views;
-  activeView: Views;
-}
-
-export interface FlowProps {
-  activeView: Views;
+  config: FlowConfig;
 }

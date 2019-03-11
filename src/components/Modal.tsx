@@ -1,51 +1,37 @@
 import React, { SFC } from 'react';
-import { FlowProvider, FlowConsumer } from './Flow/FlowContext';
-import { ViewProvider } from './View/ViewContext';
-import Views from './shared/views';
+import { Flow, FlowConsumer, View } from './flow';
+import { config, Views } from './config';
 import ModalItem from './ModalItem';
 
 const Modal: SFC = () => {
   return (
-    <FlowProvider activeView={Views.AddedProduct}>
-      <FlowConsumer>
-        {({ flowContext: { titleView } }) => {
-          return (
-            <div className="modal">
-              <div className="modal-header">
-                <h1>{titleView}</h1>
-              </div>
-              <div className="modal-content">
-                <ViewProvider
-                  id={Views.AddedProduct}
-                  title="Producto agregado al carrito"
-                  actions={{
-                    goToLogin: Views.Login,
-                    goToShippingAddress: Views.ShippingAddress
-                  }}>
-                  <ModalItem className="content c1" />
-                </ViewProvider>
+    <Flow config={config}>
+      <div className="modal">
+        <View id={Views.selectDeliveryType}>
+          <ModalItem className="content c1" title="Conteniedo 1" />
+        </View>
 
-                <ViewProvider
-                  id={Views.Login}
-                  title="Inicio de sesión"
-                  actions={{
-                    returnAddedProduct: Views.AddedProduct,
-                    goToShippingAddress: Views.ShippingAddress
-                  }}>
-                  <ModalItem className="content c2" />
-                </ViewProvider>
+        <View id={Views.requestMail}>
+          <ModalItem className="content c2" title="Conteniedo 2" />
+        </View>
 
-                <ViewProvider
-                  id={Views.ShippingAddress}
-                  title="Dirección de envio">
-                  <ModalItem className="content c3" showClose={true} />
-                </ViewProvider>
-              </div>
-            </div>
-          );
-        }}
-      </FlowConsumer>
-    </FlowProvider>
+        <View id={Views.requestAddress}>
+          <ModalItem className="content c3" title="Conteniedo 3" />
+        </View>
+
+        <View id={Views.withCoverage}>
+          <ModalItem className="content c4" title="Conteniedo 4" />
+        </View>
+
+        <View id={Views.withoutCoverage}>
+          <ModalItem className="content c5" title="Conteniedo 5" />
+        </View>
+
+        <View id={Views.buyAndPick}>
+          <ModalItem className="content c6" title="Conteniedo 6" />
+        </View>
+      </div>
+    </Flow>
   );
 };
 

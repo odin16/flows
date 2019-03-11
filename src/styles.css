@@ -14,14 +14,8 @@
 
 .modal {
   width: 70%;
-  height: 400px;
+  height: 70%;
   border: solid 1px #000;
-}
-
-.modal-header {
-  border-bottom: solid 1px #000;
-  padding: 0.5em;
-  text-align: center;
 }
 
 .content,
@@ -31,9 +25,6 @@
   justify-content: center;
   align-items: center;
   color: #fff;
-}
-.modal-content {
-  height: 84.6%;
 }
 .content {
   height: 100%;
@@ -57,4 +48,13 @@ button {
 }
 .c3 {
   background: #25d366;
+}
+.c4 {
+  background: #303f9f;
+}
+.c5 {
+  background: #c5cae9;
+}
+.c6 {
+  background: #5d4037;
 }

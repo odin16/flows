@@ -1,55 +1,53 @@
 import React, { SFC } from 'react';
-import { ViewConsumer } from './View/ViewContext';
-import { FlowConsumer } from './Flow/FlowContext';
+import { FlowConsumer } from './flow';
 
 interface ModalItemProps {
   className: string;
-  showClose: boolean;
+  title: string;
 }
 
 const ModalItem: SFC<ModalItemProps> = props => {
   return (
     <FlowConsumer>
       {({
-        flowContext: {
-          goToView,
-          goToBack,
-          closeFlow,
-          prevActiveView,
-          existsViewsHistory
-        }
+        views,
+        activeView,
+        prevActiveView,
+        existsViewsHistory,
+        goToView,
+        goToNextView,
+        backInHistory
       }) => {
+        const next = views[activeView].next;
+        const nextIsArray = Array.isArray(next);
+
         return (
-          <ViewConsumer>
-            {({ viewContext: { actions } }) => {
-              return (
-                <div className={props.className}>
-                  <div className="btns">
-                    {actions &&
-                      Object.keys(actions).map((key, i) => (
-                        <button key={i} onClick={goToView(actions[key])}>
-                          {key}
-                        </button>
-                      ))}
+          <div className={props.className}>
+            <h2>{props.title}</h2>
+            <div className="btns">
+              {next && !nextIsArray && (
+                <button onClick={() => goToNextView()}>Next</button>
+              )}
 
-                    {props.showClose && (
-                      <button onClick={() => setTimeout(closeFlow, 2000)}>
-                        Close
-                      </button>
-                    )}
+              {next &&
+                nextIsArray &&
+                (next as string[]).map((id, i) => {
+                  return (
+                    <button key={i} onClick={() => goToNextView(i)}>
+                      Branch {i}
+                    </button>
+                  );
+                })}
 
-                    {prevActiveView && (
-                      <button onClick={goToView(prevActiveView)}>Prev</button>
-                    )}
+              {prevActiveView && (
+                <button onClick={() => goToView(prevActiveView)}>Prev</button>
+              )}
 
-                    {existsViewsHistory && (
-                      <button onClick={goToBack}>Back</button>
-                    )}
-                  </div>
-                </div>
-              );
-            }}
-          </ViewConsumer>
+              {existsViewsHistory && (
+                <button onClick={backInHistory}>Back in history</button>
+              )}
+            </div>
+          </div>
         );
       }}
     </FlowConsumer>
