@@ -16,7 +16,8 @@ const ModalItem: SFC<ModalItemProps> = props => {
         existsViewsHistory,
         goToView,
         goToNextView,
-        backInHistory
+        backInHistory,
+        saveData
       }) => {
         const next = views[activeView].next;
         const nextIsArray = Array.isArray(next);
@@ -26,7 +27,15 @@ const ModalItem: SFC<ModalItemProps> = props => {
             <h2>{props.title}</h2>
             <div className="btns">
               {next && !nextIsArray && (
-                <button onClick={() => goToNextView()}>Next</button>
+                <button
+                  onClick={() => {
+                    goToNextView();
+                    saveData({
+                      title: props.title
+                    });
+                  }}>
+                  Next
+                </button>
               )}
 
               {next &&

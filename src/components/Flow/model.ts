@@ -1,5 +1,8 @@
 export interface ViewConfig {
   next: string | string[];
+  component: Promise<any>;
+  props?: any;
+  data?: any;
 }
 
 export interface ListView {
@@ -19,6 +22,7 @@ export interface ConsumerProps {
   goToView: (id: string) => void;
   backInHistory: () => void;
   goToNextView: (branch?: number) => void;
+  saveData: (data: any) => void;
 }
 
 export interface ProviderProps {
