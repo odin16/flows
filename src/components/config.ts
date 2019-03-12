@@ -1,4 +1,4 @@
-import { FlowConfig } from './flow';
+import { FlowConfig } from './Flow';
 
 export enum Views {
   selectDeliveryType = '1',

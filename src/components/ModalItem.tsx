@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { FlowConsumer } from './flow';
+import { FlowConsumer } from './Flow';
 
 interface ModalItemProps {
   className: string;

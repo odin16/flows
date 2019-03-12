@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import { Flow, FlowConsumer, View } from './flow';
+import { Flow, FlowConsumer } from './Flow';
 import { config, Views } from './config';
 import ModalItem from './ModalItem';
 

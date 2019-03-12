@@ -61,7 +61,6 @@ const FlowProvider: FunctionComponent<ProviderProps> = ({
 
   const View = () => {
     const view = views[activeView];
-    console.log('Views: ', views);
     if (!isEmpty(view)) {
       return createElement(
         asyncComponent({
